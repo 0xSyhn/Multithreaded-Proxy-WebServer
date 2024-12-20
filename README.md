@@ -11,6 +11,7 @@ Proxy Server was implemented using LRU Cache to optimize performance by storing 
 
 ### How Does the Cache Work?
 When data is accessed:
+
 -> If it exists in the cache (cache hit), it's moved to the "most recently used" position.
 
 -> If it doesn’t exist (cache miss), the data is fetched, added to the cache, and the least recently used item is evicted   if the cache is full.
