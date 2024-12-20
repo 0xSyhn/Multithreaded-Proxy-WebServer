@@ -16,7 +16,7 @@ When data is accessed:
 
 -> If it doesn’t exist (cache miss), the data is fetched, added to the cache, and the least recently used item is evicted   if the cache is full.
 
-### Why did I use C++?
+### Why did I choose C++?
 -> I wanted to learn how to build at a low level.
 
 -> I noticed many projects were built in C, so I wanted to try something different.
