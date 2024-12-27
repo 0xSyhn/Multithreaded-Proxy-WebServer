@@ -11,5 +11,3 @@ proxy: server.cpp
 clean:
 	rm -f proxy *.o
 
-tar:
-	tar -cvzf ass1.tgz server.cpp README Makefile proxy_parse.c proxy_parse.h

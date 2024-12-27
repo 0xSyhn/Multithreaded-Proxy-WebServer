@@ -145,81 +145,31 @@ int sendError(int socket, int statusCode) {
 
     strftime(currentTime, sizeof(currentTime), "%a, %d %b %Y %H:%M:%S GMT", &tm);
 
-    std::string response;
-
     switch (statusCode) {
         case 400:
-            response = "HTTP/1.1 400 Bad Request\r\n"
-                       "Content-Length: 95\r\n"
-                       "Connection: keep-alive\r\n"
-                       "Content-Type: text/html\r\n"
-                       "Date: " + string(currentTime) + "\r\n"
-                       "Server: SYHN/14785\r\n\r\n"
-                       "<HTML><HEAD><TITLE>400 Bad Request</TITLE></HEAD>\n"
-                       "<BODY><H1>400 Bad Request</H1>\n</BODY></HTML>";
             cout<<"400 Bad Request"<<endl;
             break;
 
         case 403:
-            response = "HTTP/1.1 403 Forbidden\r\n"
-                       "Content-Length: 112\r\n"
-                       "Connection: keep-alive\r\n"
-                       "Content-Type: text/html\r\n"
-                       "Date: " + string(currentTime) + "\r\n"
-                       "Server: SYHN/14785\r\n\r\n"
-                       "<HTML><HEAD><TITLE>403 Forbidden</TITLE></HEAD>\n"
-                       "<BODY><H1>403 Forbidden</H1><br>Permission Denied\n</BODY></HTML>";
             cout<<"403 Forbidden"<<endl;
             break;
 
         case 404:
-            response = "HTTP/1.1 404 Not Found\r\n"
-                       "Content-Length: 91\r\n"
-                       "Connection: keep-alive\r\n"
-                       "Content-Type: text/html\r\n"
-                       "Date: " + string(currentTime) + "\r\n"
-                       "Server: SYHN/14785\r\n\r\n"
-                       "<HTML><HEAD><TITLE>404 Not Found</TITLE></HEAD>\n"
-                       "<BODY><H1>404 Not Found</H1>\n</BODY></HTML>";
             cout<< "404 Not Found"<<endl;
             send(socket, str, strlen(str), 0);
             break;
 
         case 500:
-            response = "HTTP/1.1 500 Internal Server Error\r\n"
-                       "Content-Length: 115\r\n"
-                       "Connection: keep-alive\r\n"
-                       "Content-Type: text/html\r\n"
-                       "Date: " + string(currentTime) + "\r\n"
-                       "Server: SYHN/14785\r\n\r\n"
-                       "<HTML><HEAD><TITLE>500 Internal Server Error</TITLE></HEAD>\n"
-                       "<BODY><H1>500 Internal Server Error</H1>\n</BODY></HTML>";
             cout<<"500 Internal Server Error"<<endl;
             send(socket, str, strlen(str), 0);
             break;
 
         case 501:
-            response = "HTTP/1.1 501 Not Implemented\r\n"
-                       "Content-Length: 103\r\n"
-                       "Connection: keep-alive\r\n"
-                       "Content-Type: text/html\r\n"
-                       "Date: " + string(currentTime) + "\r\n"
-                       "Server: SYHN/14785\r\n\r\n"
-                       "<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD>\n"
-                       "<BODY><H1>501 Not Implemented</H1>\n</BODY></HTML>";
             cout<<"501 Not Implemented"<<endl;
             send(socket, str, strlen(str), 0);
             break;
 
         case 505:
-            response = "HTTP/1.1 505 HTTP Version Not Supported\r\n"
-                       "Content-Length: 125\r\n"
-                       "Connection: keep-alive\r\n"
-                       "Content-Type: text/html\r\n"
-                       "Date: " + string(currentTime) + "\r\n"
-                       "Server: SYHN/14785\r\n\r\n"
-                       "<HTML><HEAD><TITLE>505 HTTP Version Not Supported</TITLE></HEAD>\n"
-                       "<BODY><H1>505 HTTP Version Not Supported</H1>\n</BODY></HTML>";
             cout<<"505 HTTP Version Not Supported"<<endl;
             send(socket, str, strlen(str), 0);
             break;
@@ -366,7 +316,7 @@ void *threadFn(void *socketNew) {
         
         // Prevent buffer overflow
         if (total_bytes >= BUFFER_SIZE - 1) {
-            sendError(socket, 413); // Request Entity Too Large
+            sendError(socket, 413); 
             delete[] buffer;
             sem_post(&semaphore);
             return NULL;
